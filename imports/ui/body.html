@@ -1,11 +1,22 @@
 <body>
     <div class="container">
         <header>
-            <h1>To Do List</h1>
+            <h1>To Do List: {{incompleteCount}} remaining</h1>
 
+            <label class="hide-completed">
+                <input type="checkbox" />
+                Hide completed tasks
+
+            </label>
+
+            {{> loginButtons}}
+            <!-- {{currentUser.username}} -->
+
+            {{#if currentUser}}
             <form class="new-task">
                 <input type="text" name="text" placeholder="Type in new tasks here" />
             </form>
+            {{/if}}
         </header>
 
         <ul>
