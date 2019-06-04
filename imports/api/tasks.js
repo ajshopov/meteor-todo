@@ -22,7 +22,7 @@ Meteor.methods({
         check(text, String);
 
         // check user logged in before writing to db
-        if (! Meteor.userId()) {
+        if (!Meteor.userId()) {
             throw new Meteor.Error('not authorized');
         }
         Tasks.insert({
@@ -37,7 +37,7 @@ Meteor.methods({
         check(taskId, String);
 
         //  make sure only owner can delete private task
-        const task = Meteor.findOne(taskId);
+        const task = Tasks.findOne(taskId);
         if (task.private && task.owner !== Meteor.userId()) {
             throw new Meteor.Error('not authorised');
         }
@@ -50,7 +50,8 @@ Meteor.methods({
         check(setChecked, Boolean);
 
         //  make sure only owner can check private task
-        const task = Meteor.findOne(taskId);
+        const task = Tasks.findOne(taskId);
+        console.log(task);
         if (task.private && task.owner !== Meteor.userId()) {
             throw new Meteor.Error('not authorised');
         }
