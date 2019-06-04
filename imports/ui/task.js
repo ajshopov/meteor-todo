@@ -5,6 +5,12 @@ import { Template } from "meteor/templating";
 
 import './task.html';
 
+Template.task.helpers({
+    isOwner(){
+        return this.owner === Meteor.userId();
+    },
+});
+
 Template.task.events({
     'click .toggle-checked'(){
         // checked property is reversed
@@ -19,4 +25,7 @@ Template.task.events({
         // console.log(this)
         // Tasks.remove(this._id)
     },
+    'click .toggle-private'(){
+        Meteor.call('tasks.setPrivate', this._id, !this.private);
+    }
 });
